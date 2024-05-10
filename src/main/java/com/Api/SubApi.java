@@ -75,7 +75,7 @@ public class SubApi {
 			jsonObject.put("subscriptionProviderId", "CSM");
 			jsonObject.put("subscriptionDescription", infoPrice.getPlan_name());
 			jsonObject.put("subscriptionId", infoPrice.getPlan_id());
-			jsonObject.put("registrationChannel", "WAP");
+			jsonObject.put("registrationChannel", "WEB");
 
 			requestEntity = new HttpEntity<>(jsonObject.toString(), headers);
 
