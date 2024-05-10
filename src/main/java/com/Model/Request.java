@@ -27,6 +27,7 @@ public class Request {
     private String msisdn;
     private String nodeIdentifier;
     private Parameters parameters;
+    private String newRequest;
     private String region;
     private FreeFlow freeflow;
     private String sessionId;

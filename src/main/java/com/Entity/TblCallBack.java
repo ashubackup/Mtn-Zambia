@@ -26,4 +26,5 @@ public class TblCallBack
 	private String callback;
 	private LocalDateTime datetime;
 	private String status;
+	private String type;
 }

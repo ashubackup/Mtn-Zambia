@@ -28,4 +28,10 @@ public class XMLUtils {
             super(message, cause);
         }
     }
+    
+    public static String marshalToString(Object obj, Marshaller marshaller) throws JAXBException {
+        StringWriter sw = new StringWriter();
+        marshaller.marshal(obj, sw);
+        return sw.toString();
+    }
 }

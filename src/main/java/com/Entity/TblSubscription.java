@@ -30,4 +30,5 @@ public class TblSubscription
 	private LocalDateTime next_billed_date;
 	private LocalDateTime last_billed_date;
 	private String status;
+	private String pack;
 }

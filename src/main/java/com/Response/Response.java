@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Response {
 
+	@XmlElement
 	private String msisdn;
 
     @XmlElement(name = "applicationResponse")
