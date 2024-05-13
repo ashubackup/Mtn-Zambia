@@ -19,6 +19,7 @@ public class HeaderController {
         String newDomain = "http://www.bigcashmtnzm.com/headers"; // Specify the default domain
 
         try {
+        	System.out.println("Header::::: "+headers);
             if (!headers.containsKey("msisdn")) {
                 // If "msisdn" key is not present in headers
                 // You can handle this case here
