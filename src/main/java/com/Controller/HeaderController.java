@@ -16,7 +16,7 @@ public class HeaderController {
     @GetMapping("/headers")
     public RedirectView getRequest(@RequestHeader Map<String, String> headers) {
 
-        String newDomain = "http://www.bigcashmtnzm.com/headers"; // Specify the default domain
+        String newDomain = "https://www.bigcashmtnzm.com/headers"; // Specify the default domain
 
         try {
         	System.out.println("Header::::: "+headers);
@@ -28,7 +28,7 @@ public class HeaderController {
                 String msisdn = headers.get("msisdn").toString();
                 System.out.println("msisdn is: " + msisdn);
                 // You can perform further processing with msisdn if needed
-                newDomain = "http://www.bigcashmtnzm.com/headers?msisdn="+msisdn;
+                newDomain = "https://www.bigcashmtnzm.com/headers?msisdn="+msisdn;
             }
         } catch (Exception e) {
             e.printStackTrace();
