@@ -29,7 +29,8 @@ public class UnsubService {
 			AtomicReference<String> atomicResponse = new AtomicReference<>(response); // Using AtomicReference as
 																						// mutable object
 			List<TblSubscription> subscription = subRepo.findByAni(msisdn);
-			if (subscription.isEmpty()) {
+			if (!subscription.isEmpty()) {
+				System.out.println("Inside if statement");
 				subscription.forEach(tblsubscription -> {
 					String apiresponse = unsubApi.hitUnsubApi(msisdn, tblsubscription.getPack());
 					System.out.println("apiResponse"+apiresponse);
@@ -52,6 +53,10 @@ public class UnsubService {
 
 				});
 				response = atomicResponse.get();
+			}
+			else
+			{
+				
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

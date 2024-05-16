@@ -15,8 +15,10 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.Entity.LoginInfo;
+import com.Entity.ServiceInfoPrice;
 import com.Entity.TblUnsubsciption;
 import com.Repository.LoginInfoRepo;
+import com.Repository.ServiceInfoPriceRepo;
 
 @Service
 public class UnsubApi 
@@ -31,13 +33,16 @@ public class UnsubApi
 	@Autowired
 	private RestTemplate restTemplate;
 	
+	@Autowired
+	private ServiceInfoPriceRepo serviceInfoPriceRepo;
+	
 	public String hitUnsubApi(String ani,String pack)
 	{
-		LoginInfo info = infoRepo.findByStatusAndType("1", "sub");
+		LoginInfo info = infoRepo.findByStatusAndType("1", "unsub");
 		String apiUrl = info.getApi();
 		String token = apigenerateToken.genrateToken();
-
-		apiUrl = apiUrl.replace("<ani>", ani).replace("<pack>", pack);
+		ServiceInfoPrice infoPrice = serviceInfoPriceRepo.findByPack(pack);
+		apiUrl = apiUrl.replace("<ani>", ani).replace("<pack>", infoPrice.getPlan_id()).replace("<description>", infoPrice.getPlan_name());
 
 		System.out.println("Api is---" + apiUrl);
 	    
