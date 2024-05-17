@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.Api.UnsubApi;
+import com.Entity.TblSmsLogs;
 import com.Entity.TblSubscription;
 import com.Entity.TblUnsubsciption;
 import com.Repository.TblSubRepo;
@@ -22,6 +23,9 @@ public class UnsubService {
 
 	@Autowired
 	UnsubRepo unsubRepo;
+	
+	@Autowired
+	SmsService smsService;
 
 	public String getRequestUnsub(String msisdn) {
 		String response = "Failed";
@@ -48,6 +52,7 @@ public class UnsubService {
 						tblUnsubsciption.setUnsubDateTime(LocalDateTime.now());
 						unsubRepo.save(tblUnsubsciption);
 						subRepo.delete(tblsubscription);
+						smsService.getRequest(msisdn);
 					}
 					atomicResponse.set(apiresponse);
 

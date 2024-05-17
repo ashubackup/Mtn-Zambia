@@ -57,6 +57,10 @@ public class SaveCallBack
 			{
 				newCallBack.setType("FailedRen");
 			}
+			else if(operationId.equalsIgnoreCase("SP"))
+			{
+				newCallBack.setType("FailedBilling");
+			}
 			else
 			{
 				newCallBack.setType("billing");
