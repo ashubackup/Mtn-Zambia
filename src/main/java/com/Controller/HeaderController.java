@@ -26,9 +26,12 @@ public class HeaderController {
                 // For now, I'm setting newDomain to the default domain
             } else {
                 String msisdn = headers.get("msisdn").toString();
+                msisdn =msisdn.replace(":", "").strip();
                 System.out.println("msisdn is: " + msisdn);
                 // You can perform further processing with msisdn if needed
+                
                 newDomain = "https://www.bigcashmtnzm.com/headers?msisdn="+msisdn;
+                System.out.println("LINK IS:: "+newDomain);
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -25,7 +25,7 @@ public class SaveCallBack
 			String operationId=jsonObject.get("operationId").toString();
 			String result=jsonObject.get("result").toString();
 			System.out.println("OPerationId"+operationId);
-			if(operationId.equalsIgnoreCase("ACI") || operationId.equalsIgnoreCase("SCI"))
+			if(operationId.equalsIgnoreCase("ACI") || operationId.equalsIgnoreCase("SCI") || operationId.equalsIgnoreCase("PCI") || operationId.equalsIgnoreCase("GCI"))
 			{
 				if(result.equalsIgnoreCase("You deactivate the service successfully."))
 				{
@@ -37,7 +37,7 @@ public class SaveCallBack
 				}
 				
 			}
-			else if(operationId.equalsIgnoreCase("SN") )
+			else if(operationId.equalsIgnoreCase("SN") || operationId.equalsIgnoreCase("PN"))
 			{
 				if(result.equalsIgnoreCase("Success"))
 				{
@@ -45,27 +45,36 @@ public class SaveCallBack
 				}
 				else
 				{
-					newCallBack.setType("FailedBilling");
+					newCallBack.setType("subFailed");
 				}
 				
 			}
-			else if(operationId.equalsIgnoreCase("YR"))
+			//renewal success
+			else if(operationId.equalsIgnoreCase("YR") || operationId.equalsIgnoreCase("RR") || operationId.equalsIgnoreCase("GR") )
 			{
 				newCallBack.setType("Ren");
 			}
-			else if(operationId.equalsIgnoreCase("RR"))
+			//renewal failed.
+			else if(operationId.equalsIgnoreCase("YF") || operationId.equalsIgnoreCase("GF"))
 			{
 				newCallBack.setType("FailedRen");
 			}
+			
+			//delete number whose not charged i 5 days
+			else if(operationId.equalsIgnoreCase("PD"))
+			{
+				newCallBack.setType("expiredRen");
+			}
 			else if(operationId.equalsIgnoreCase("SP"))
 			{
-				newCallBack.setType("FailedBilling");
+				newCallBack.setType("subFailed");
 			}
 			else
 			{
-				newCallBack.setType("billing");
+				newCallBack.setType("subFailed");
 			}
 				
+			
 			System.out.println("CallBack Body"+json);
 			
 			newCallBack.setCallback(json);

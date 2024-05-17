@@ -62,7 +62,7 @@ public class SmsService {
 
 			String token = apigenerateToken.genrateToken();
 
-			LoginInfo info = infoRepo.findByStatusAndType("1", "sub");
+			LoginInfo info = infoRepo.findByStatusAndType("1", "sms");
 			String api = info.getApi();
 
 			HttpHeaders headers = new HttpHeaders();
