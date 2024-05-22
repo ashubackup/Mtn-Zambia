@@ -52,7 +52,7 @@ public class UnsubService {
 						tblUnsubsciption.setUnsubDateTime(LocalDateTime.now());
 						unsubRepo.save(tblUnsubsciption);
 						subRepo.delete(tblsubscription);
-						smsService.getRequest(msisdn);
+						//smsService.getRequest(msisdn);
 					}
 					atomicResponse.set(apiresponse);
 
