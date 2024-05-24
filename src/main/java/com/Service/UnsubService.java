@@ -55,6 +55,8 @@ public class UnsubService {
                     atomicResponse[0] = apiresponse;
                 });
                 response = atomicResponse[0];
+            } else {
+                // Handle the case where the subscription list is empty
             }
         } catch (Exception e) {
             e.printStackTrace();
