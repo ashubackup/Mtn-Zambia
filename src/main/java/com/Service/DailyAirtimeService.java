@@ -3,6 +3,8 @@ import java.util.List;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.Api.AirtimeApi;
 import com.Api.Api;
 import com.Entity.AirtimeData;
 import com.Entity.OperatorInfo;
@@ -24,21 +26,25 @@ public class DailyAirtimeService
 	private PrizesRepo prizeRepo;
 	
 	@Autowired
-	private Api api;
+	private AirtimeApi api;
 	
 	public void dailyAirtimeService()
 	{
 		try
 		{
-			//serviceId=11 for BigcashMTN
-			System.out.println("Handling For Bigcash MTN, ServiceId = 11");
-			List<AirtimeData> numbers = airtimeRepo.getDailyAirtimeNumbers("11");
-			sendAirtime(numbers);
+//			//serviceId=11 for BigcashMTN
+//			System.out.println("Handling For Bigcash MTN, ServiceId = 11");
+//			List<AirtimeData> numbers = airtimeRepo.getDailyAirtimeNumbers("11");
+//			sendAirtime(numbers);
+//			
+//			System.out.println("\nHandling For Bigcash Telkom, ServiceId = 1");
+//			//serviceId=1 for BigcashTelkom
+//			List<AirtimeData> number2 = airtimeRepo.getDailyAirtimeNumbers("1");
+			//serviceID is 1 for BIgCashZambia
+			System.out.println("Handling airtime for BigCash MTN");
+			List<AirtimeData> numbers = airtimeRepo.getDailyAirtimeNumbers("1");
 			
-			System.out.println("\nHandling For Bigcash Telkom, ServiceId = 1");
-			//serviceId=1 for BigcashTelkom
-			List<AirtimeData> number2 = airtimeRepo.getDailyAirtimeNumbers("1");
-			sendAirtime(number2);
+			sendAirtime(numbers);
 			
 		}catch(Exception e)
 		{
@@ -57,35 +63,7 @@ public class DailyAirtimeService
 			List<Prizes> prizes = prizeRepo.getPrizesToPay(numbers.size());
 			System.out.println("Prizes List Size is "+prizes.size()+"\n");
 			
-			for(int i=0;i<numbers.size();i++)
-			{
-				//To get product_id
-				 OperatorInfo operator = operatorInfoRepo.findByStatusAndServiceId("1",numbers.get(i).getServiceId());
-				
-				 //Generate Random Number
-				 long rando = (long)Math.floor(Math.random()*9000000000000000000L);
-				 String random = String.valueOf(rando);
-				 
-				  JSONObject jsonObj=new JSONObject();
-				  jsonObj.put("smartloadId", "27784164170");
-				  jsonObj.put("clientReference", "Ref" + random);
-				  jsonObj.put("smsRecipientMsisdn", "27" + numbers.get(i).getAni());
-				  jsonObj.put("deviceId", "1");
-				  jsonObj.put("productId",operator.getProduceId());
-				  jsonObj.put("amount",prizes.get(i).getPrize());
-				  jsonObj.put("sendSms", true);
-				  jsonObj.put("smsProviderIdentifier",operator.getMessage());
-				  System.out.println("Request is "+jsonObj+"\n");
-				  
-				//Hit On Api for Airtime
-//				  String response = api.hitRedeemInNewWay(jsonObj);
-				  
-				  numbers.get(i).setRequest(jsonObj.toString());
-//				  numbers.get(i).setResponse(response);
-				  numbers.get(i).setStatus("1");
-				  
-				  airtimeRepo.save(numbers.get(i));
-			}
+			api.hitAirtimeApi(numbers);
 		}catch(Exception e)
 		{
 			e.printStackTrace();
