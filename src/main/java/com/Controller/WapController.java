@@ -235,7 +235,7 @@ public class WapController {
 	
 	@CrossOrigin("*")
 	@PostMapping("/verifyUser")
-	public void checkUserValid(@RequestBody LoginModal model )
+	public Map<String,Boolean> checkUserValid(@RequestBody LoginModal model )
 	{
 		Map<String,Boolean> response = new HashMap<String, Boolean>();
 		try
@@ -271,5 +271,6 @@ public class WapController {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+		return response;
 	}
 }
