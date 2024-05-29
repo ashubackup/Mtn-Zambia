@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.logging.LoggingInitializationContext;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ import com.Model.SendWinnersRequest;
 import com.Model.SubRequest;
 import com.Model.TermsRequest;
 import com.Repository.ServiceInfoRepo;
+import com.Repository.TblSubRepo;
 import com.Service.CheckUserStatusService;
 import com.Service.LogInService;
 import com.Service.SaveScoreService;
@@ -42,6 +44,9 @@ import com.Service.UnsubService;
 public class WapController {
 	@Autowired
 	private SendTermsService serviceTerm;
+	
+	@Autowired
+	TblSubRepo subRepo;
 
 	@CrossOrigin
 	@PostMapping("/sendTerms")
@@ -226,5 +231,45 @@ public class WapController {
 			e.printStackTrace();
 		}
 		return response;
+	}
+	
+	@CrossOrigin("*")
+	@PostMapping("/verifyUser")
+	public void checkUserValid(@RequestBody LoginModal model )
+	{
+		Map<String,Boolean> response = new HashMap<String, Boolean>();
+		try
+		{
+			//MOYE MOYE 
+			String msisdn = model.getAni();
+			msisdn = msisdn.startsWith("0") ? msisdn.substring("0".length()) : msisdn;
+			msisdn = msisdn.startsWith("260") ? msisdn.substring("260".length()) : msisdn;
+			msisdn = "260" + msisdn;
+			List<TblSubscription> subscription = subRepo.findByAni(msisdn);
+			if(!subscription.isEmpty())
+			{
+				for(TblSubscription tblSubscription : subscription)
+				{
+					if(tblSubscription.getNext_billed_date()==null || tblSubscription.getNext_billed_date().isBefore(LocalDateTime.now()))
+					{
+						response.put("response", false);
+					}
+					else
+					{
+						response.put("response", false);
+					}
+				}
+			}
+			else
+			{
+				response.put("response", false);
+			}
+				
+			
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 }

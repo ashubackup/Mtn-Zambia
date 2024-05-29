@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,7 @@ public class AirtimeApi
 				  jsonObj.put("accountNumber", numbers.get(i).getAni());
 				  
 				  HttpHeaders headers = new HttpHeaders();
-				  headers.setContentType(MediaType.APPLICATION_JSON);
+				  headers.set("Content-Type","application/json");
 				  
 				  HttpEntity<String> entity = new HttpEntity<>(jsonObj.toString(),headers);
 				  
@@ -50,7 +51,7 @@ public class AirtimeApi
 				  
 				  System.out.println("Request is "+jsonObj+"\n");
 				  
-				  ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
+				  ResponseEntity<String> response = restTemplate.exchange(url,HttpMethod.POST, entity, String.class);
 				  
 				  System.out.println("Response from ani api "+response);
 			}
