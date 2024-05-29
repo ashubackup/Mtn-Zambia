@@ -233,14 +233,16 @@ public class WapController {
 		return response;
 	}
 	
-	@CrossOrigin("*")
+	
 	@PostMapping("/verifyUser")
+	@CrossOrigin("*")
 	public Map<String,Boolean> checkUserValid(@RequestBody LoginModal model )
 	{
 		Map<String,Boolean> response = new HashMap<String, Boolean>();
 		try
 		{
 			//MOYE MOYE 
+			System.out.println("model"+model.getAni());
 			String msisdn = model.getAni();
 			msisdn = msisdn.startsWith("0") ? msisdn.substring("0".length()) : msisdn;
 			msisdn = msisdn.startsWith("260") ? msisdn.substring("260".length()) : msisdn;
@@ -252,11 +254,12 @@ public class WapController {
 				{
 					if(tblSubscription.getNext_billed_date()==null || tblSubscription.getNext_billed_date().isBefore(LocalDateTime.now()))
 					{
+						System.out.println("Billing Failed user");
 						response.put("response", false);
 					}
 					else
 					{
-						response.put("response", false);
+						response.put("response", true);
 					}
 				}
 			}
