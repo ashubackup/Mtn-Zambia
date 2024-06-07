@@ -63,7 +63,7 @@ public class DailyAirtimeService
 			List<Prizes> prizes = prizeRepo.getPrizesToPay(numbers.size());
 			System.out.println("Prizes List Size is "+prizes.size()+"\n");
 			
-			api.hitAirtimeApi(numbers);
+			api.hitAirtimeApi(numbers,prizes);
 		}catch(Exception e)
 		{
 			e.printStackTrace();

@@ -27,4 +27,5 @@ public class AirtimeCallBackEntity
 	private String callback;
 	private String status;
 	private LocalDateTime datetime;
+	private String type;
 }

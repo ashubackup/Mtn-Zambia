@@ -15,7 +15,7 @@ public class AirtimeCallbackService
 	@Autowired
 	AirtimeCallBackRepo airtimeCallBackRepo; 
 
-	public String getAirtimeCallback(String callback)
+	public String getAirtimeCallback(String callback,String type)
 	{
 		String response = "Failed";
 		try
@@ -24,6 +24,7 @@ public class AirtimeCallbackService
 			airtimeCallBackEntity.setCallback(callback);
 			airtimeCallBackEntity.setDatetime(LocalDateTime.now());
 			airtimeCallBackEntity.setStatus("0");
+			airtimeCallBackEntity.setType(type);
 			airtimeCallBackRepo.save(airtimeCallBackEntity);
 			System.out.println("Callback saved for airtime callback");
 			response = "Successfully Saved";

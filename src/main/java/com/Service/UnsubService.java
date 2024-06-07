@@ -36,22 +36,6 @@ public class UnsubService {
                 subscription.forEach(tblsubscription -> {
                     String apiresponse = unsubApi.hitUnsubApi(msisdn, tblsubscription.getPack());
                     System.out.println("apiResponse" + apiresponse);
-                    if (apiresponse.equalsIgnoreCase("Success")) {
-                        TblUnsubsciption tblUnsubsciption = new TblUnsubsciption();
-                        tblUnsubsciption.setAmount(tblsubscription.getAmount());
-                        tblUnsubsciption.setAni(msisdn);
-                        tblUnsubsciption.setM_act(tblsubscription.getMode());
-                        tblUnsubsciption.setPack(tblsubscription.getPack());
-                        tblUnsubsciption.setM_deact("WEB");
-                        tblUnsubsciption.setProcessDateTime(LocalDateTime.now());
-                        tblUnsubsciption.setService("MTNZAMBIA");
-                        tblUnsubsciption.setStatus("1");
-                        tblUnsubsciption.setSubDateTime(tblsubscription.getSub_date_time());
-                        tblUnsubsciption.setUnsubDateTime(LocalDateTime.now());
-                        unsubRepo.save(tblUnsubsciption);
-                        subRepo.delete(tblsubscription);
-                        //smsService.getRequest(msisdn);
-                    }
                     atomicResponse[0] = apiresponse;
                 });
                 response = atomicResponse[0];

@@ -23,7 +23,24 @@ public class AirtimeCallback
 		String response = "Failed";
 		try
 		{
-			response = airtimeCallbackService.getAirtimeCallback(json);
+			response = airtimeCallbackService.getAirtimeCallback(json,"airtime");
+			return ResponseEntity.ok(response);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return ResponseEntity.internalServerError().body("Some thing Went Wrong");
+		}
+		
+	}
+	
+	@PostMapping("/cashcallback")
+	public ResponseEntity<?> CashCallBack(@RequestBody String json)
+	{
+		String response = "Failed";
+		try
+		{
+			response = airtimeCallbackService.getAirtimeCallback(json,"Cash");
 			return ResponseEntity.ok(response);
 		}
 		catch (Exception e) {
