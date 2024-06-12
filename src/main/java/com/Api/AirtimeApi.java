@@ -38,7 +38,7 @@ public class AirtimeApi
 				  JSONObject jsonObj=new JSONObject();
 				  jsonObj.put("receiverNumber", numbers.get(i).getAni());
 				  jsonObj.put("externalReference",randomString);
-				  jsonObj.put("amount",prizes.get(i).getPrize());
+				  jsonObj.put("amount","25");
 				  jsonObj.put("accountNumber", numbers.get(i).getAni());
 				  
 				  HttpHeaders headers = new HttpHeaders();

@@ -35,13 +35,17 @@ public class SendWinnersNewService
 			List<String> airtimeScore=new ArrayList<>();
 			for(AirtimeData airtime:airtimeWinners)
 			{
+//				System.out.println("airtimeList"+airtime);
 				airtimeScore.add(airtime.getScore().toString());
+//				airtimeScore.add(airtime);
 			}
 			
 			List<String> cashScore=new ArrayList<>();
 			for(CashData cash:cashWinners)
 			{
+//				System.out.println("cashDataList"+cash);
 				cashScore.add(cash.getScore().toString());
+//				cashScore.add(cash);
 			}
 			
 			//Managing empty data for length 10

@@ -153,6 +153,7 @@ public class WapController {
 	public ResponseEntity<?> sendWinnersNew(@RequestBody SendWinnersRequest request) {
 		Map<String, List<Map<String, String>>> response = new HashMap<>();
 		try {
+			System.out.println("Winner List"+request);
 			List<Map<String, String>> result = serviceWinerNew.sendWinnersNewService(request);
 			response.put("response", result);
 			return ResponseEntity.ok(response);

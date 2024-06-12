@@ -29,7 +29,7 @@ public class HeaderController {
                 msisdn =msisdn.replace(":", "").strip();
                 System.out.println("msisdn is: " + msisdn);
                 // You can perform further processing with msisdn if needed
-                
+                msisdn = msisdn.startsWith("260") ? msisdn.substring("260".length()) : msisdn;
                 newDomain = "https://www.bigcashmtnzm.com/headers?msisdn="+msisdn;
                 System.out.println("LINK IS:: "+newDomain);
             }

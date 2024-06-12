@@ -1,5 +1,9 @@
 package com.Entity;
 
-public class CashDataCallBack {
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class CashDataCallBack 
+{
 
 }

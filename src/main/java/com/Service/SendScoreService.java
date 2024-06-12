@@ -20,6 +20,10 @@ public class SendScoreService
 		{
 			System.out.println("Request is "+request);
 			
+			request.setAni(request.getAni().startsWith("0") ? request.getAni().substring("0".length()) : request.getAni());
+			request.setAni(request.getAni().startsWith("260") ? request.getAni().substring("260".length()) : request.getAni());
+			request.setAni("260"+request.getAni());
+			
 			AirtimeData topScorer = airtimeRepo.getTodaysTopScorer(request.getServiceId());
 			AirtimeData currentUser = airtimeRepo.getAlreadyAddedUser(request.getAni(),request.getServiceId());
 			
