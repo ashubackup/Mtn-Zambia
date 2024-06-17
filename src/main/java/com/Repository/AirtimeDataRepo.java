@@ -1,10 +1,13 @@
 package com.Repository;
-import java.util.List;	
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;	
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.Entity.AirtimeData;
+import com.Model.AirtimePositionResponse;
 
 @Repository
 public interface AirtimeDataRepo extends JpaRepository<AirtimeData,Integer>
@@ -25,4 +28,12 @@ public interface AirtimeDataRepo extends JpaRepository<AirtimeData,Integer>
 			+ "ORDER BY score DESC LIMIT 10\r\n"
 			+ "",nativeQuery=true)
 	public List<AirtimeData> getDailyAirtimeNumbers(@Param("serviceId")String serviceId);
+	
+	 
+    @Query(value = "SELECT ani, score FROM airtime_data WHERE DATE(datetime) = CURDATE() ORDER BY score DESC", nativeQuery = true)
+    Optional<List<Object[]>> getPositionScoreWise();
+    
+    @Query(value = "SELECT ani, score FROM cash_data WHERE MONTH(DATETIME) = MONTH(NOW()) ORDER BY score DESC;", nativeQuery = true)
+    Optional<List<Object[]>> getPositionScoreMonthly();
+	
 }

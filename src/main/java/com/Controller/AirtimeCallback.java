@@ -27,7 +27,6 @@ public class AirtimeCallback
 			return ResponseEntity.ok(response);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			return ResponseEntity.internalServerError().body("Some thing Went Wrong");
 		}
@@ -50,4 +49,22 @@ public class AirtimeCallback
 		}
 		
 	}
+	
+	// Not in use
+	
+//	@PostMapping("/airtimecallback")
+//    public void processTransaction(@RequestBody AirTimeCallBackData data) {
+//		try {
+//			if ("SUCCESS".equalsIgnoreCase(data.getResponse_message())) {
+//	        	System.out.println("Inside success");
+//	        	service.getRequest(data.getPayer_number(), data.getAmount());
+//	        	
+//	        } else {
+//	        	System.out.println("Success not found");
+//	        }
+//			
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//    }
 }

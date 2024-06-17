@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,4 +35,14 @@ public class AirtimeData
 	private String request;
 	@Column(columnDefinition="TEXT")
 	private String response;
+	
+	@Transient
+	private Integer position;
+	
+	public AirtimeData(String ani, Integer score, Integer position)
+	{
+		this.ani =ani;
+		this.score=score;
+		this.position=position;
+	}
 }

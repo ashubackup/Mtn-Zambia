@@ -30,7 +30,6 @@ public class AirtimeCallbackService
 			response = "Successfully Saved";
 		}
 		catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return response;
