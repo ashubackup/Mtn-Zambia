@@ -31,7 +31,7 @@ public interface AirtimeDataRepo extends JpaRepository<AirtimeData,Integer>
 	
 	 
     @Query(value = "SELECT ani, score FROM airtime_data WHERE DATE(datetime) = CURDATE() ORDER BY score DESC", nativeQuery = true)
-    Optional<List<Object[]>> getPositionScoreWise();
+    Optional<List<Object[]>> getPositionScoreDaily();
     
     @Query(value = "SELECT ani, score FROM cash_data WHERE MONTH(DATETIME) = MONTH(NOW()) ORDER BY score DESC;", nativeQuery = true)
     Optional<List<Object[]>> getPositionScoreMonthly();

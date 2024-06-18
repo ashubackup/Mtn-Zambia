@@ -41,14 +41,15 @@ public class SaveScoreService
 			
 			//First of all swapping values
 			//gameId to serviceId & serviceId to gameId
-			
+			if(!request.getAni().isEmpty())
+			{
 			String gameId = request.getGameId();
 			String serviceId = request.getServiceId();
 			request.setAni(request.getAni().startsWith("0") ? request.getAni().substring("0".length()) : request.getAni());
 			request.setAni(request.getAni().startsWith("260") ? request.getAni().substring("260".length()) : request.getAni());
 			request.setAni("260"+request.getAni());
 			request.setGameId(serviceId);
-			request.setServiceId(gameId);;
+			request.setServiceId(gameId);
 			
 			if(request.getScore()==null)
 			{
@@ -61,6 +62,11 @@ public class SaveScoreService
 			
 			saveScore(request,serviceName);
 			checkUser(request,serviceName);
+			}
+			else
+			{
+				System.out.println("No need to save request because get ani is null from save Score Game ");
+			}
 		}catch(Exception e)
 		{
 			e.printStackTrace();
